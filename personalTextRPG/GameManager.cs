@@ -1,4 +1,5 @@
-﻿using System;
+﻿using personalTextRPG.Scene;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,7 @@ namespace personalTextRPG
                 case SceneType.StartScene:
                     curScene = new StartScene();
                     break;
-                case SceneType.Status:
+                case SceneType.StatusScene:
                     curScene = new StatusScene();
                     break;
                 default:
@@ -48,6 +49,7 @@ namespace personalTextRPG
         {
             //Character.Instance.Update();
             curScene.Update();
+            Thread.Sleep(10);
         }
     }
 }

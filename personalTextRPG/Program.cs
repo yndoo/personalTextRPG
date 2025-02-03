@@ -1,4 +1,6 @@
-﻿namespace personalTextRPG
+﻿using personalTextRPG.Scene;
+
+namespace personalTextRPG
 {
     internal class Program
     {

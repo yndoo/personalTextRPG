@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,8 @@ namespace personalTextRPG
         private int health;
         private int gold;
         public int Level {  get { return level; } set { level = value; } }
+        public string Name { get => name; set => name = value; }
+        public CharacterClass CharClass { get => charClass; set => charClass = value; }
         public int Attack { get { return attack; } set { attack = value; } }   
         public int Defense { get { return defense; } set { defense = value; } }
         public int Health { get { return health; } set { health = value; } }    
