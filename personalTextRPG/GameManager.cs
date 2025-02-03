@@ -28,7 +28,6 @@ namespace personalTextRPG
 
         public void LoadScene(SceneType sceneType)
         {
-            curScene = null;
             switch(sceneType)
             {
                 case SceneType.StartScene:
@@ -37,12 +36,18 @@ namespace personalTextRPG
                 case SceneType.StatusScene:
                     curScene = new StatusScene();
                     break;
+                case SceneType.Inventory:
+                    curScene = new Inventory();
+                    break;
+                case SceneType.Store:
+                    curScene = new Store();
+                    break;
                 default:
                     Console.WriteLine("LoadScene 실패");
                     Thread.Sleep(1000);
                     break;
             }
-            curScene.Start();
+            if(curScene != null) curScene.Start();
         }
 
         public void GameLogic()

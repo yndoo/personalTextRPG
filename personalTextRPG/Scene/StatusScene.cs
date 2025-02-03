@@ -39,7 +39,7 @@ namespace personalTextRPG.Scene
                 if (Console.KeyAvailable)
                 {
                     // 키 입력이 있었다면 키를 확인
-                    ConsoleKeyInfo key = Console.ReadKey(intercept: true/*이렇게 하면 화면에 출력을 안 함*/);
+                    ConsoleKeyInfo key = Console.ReadKey(true/*이렇게 하면 화면에 출력을 안 함*/);
                     if (key.Key == ConsoleKey.D0)
                     {
                         // 나가기
@@ -47,6 +47,11 @@ namespace personalTextRPG.Scene
                         Thread.Sleep(500);
                         GameManager.Instance.LoadScene(SceneType.StartScene);
                         return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("잘못된 입력입니다.");
+                        continue;
                     }
                 }
             }
