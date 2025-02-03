@@ -4,7 +4,12 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            GameManager.Instance.LoadScene(SceneType.StartScene);
+
+            while(!GameManager.Instance.IsGameEnd)
+            {
+                GameManager.Instance.GameLogic();
+            }
         }
     }
 }
