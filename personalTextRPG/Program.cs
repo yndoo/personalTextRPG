@@ -9,6 +9,7 @@
             while(!GameManager.Instance.IsGameEnd)
             {
                 GameManager.Instance.GameLogic();
+               
             }
         }
     }

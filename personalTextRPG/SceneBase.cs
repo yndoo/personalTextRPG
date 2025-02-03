@@ -16,6 +16,8 @@ namespace personalTextRPG
     }
     class SceneBase
     {
+        private SceneType nextScene;
+        public SceneType NextScene { get => nextScene; set => nextScene = value; }
         public virtual void Start()
         {
 
@@ -40,20 +42,29 @@ namespace personalTextRPG
             base.Update();
             Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
             Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점");
-            int input = -1;
-            bool success = false;
-            while (!success)
+            while (true)
             {
-                success = int.TryParse(Console.ReadLine(), out input);
-                if(input < 1 || input > 3)
+                if (Console.KeyAvailable)
                 {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    success = false;
+                    // 키 입력이 있었다면 키를 확인
+                    ConsoleKeyInfo key = Console.ReadKey(intercept: true/*이렇게 하면 화면에 출력을 안 함*/);
+                    switch(key.Key)
+                    {
+                        case ConsoleKey.D1:
+                            NextScene = SceneType.Status; 
+                            break;
+                        default:
+                            Console.WriteLine("잘못된 입력입니다.");
+                            continue;
+                    }
+
+                    // NextScene으로 이동
+                    Console.WriteLine("이동 중..");
+                    Thread.Sleep(1000);
+                    GameManager.Instance.LoadScene(NextScene);
+                    return;
                 }
             }
-            Console.WriteLine("이동 중..");
-            Thread.Sleep(1000);
-            GameManager.Instance.LoadScene((SceneType)input);
         }
     }
     class StatusScene : SceneBase
@@ -62,13 +73,30 @@ namespace personalTextRPG
         {
             base.Start();
             Console.Clear();
-            Console.WriteLine("상태 보기");
+            Console.WriteLine("상태 보기\n캐릭터의 정보가 표시됩니다.");
         }
 
         public override void Update()
         {
             base.Update();
 
+            while (true)
+            {
+                if(Console.KeyAvailable)
+                {
+                    // 키 입력이 있었다면 키를 확인
+                    ConsoleKeyInfo key = Console.ReadKey(intercept: true/*이렇게 하면 화면에 출력을 안 함*/);
+                    if(key.Key == ConsoleKey.D0)
+                    {
+                        // 나가기
+                        Console.WriteLine("이동 중..");
+                        Thread.Sleep(1000);
+                        GameManager.Instance.LoadScene(SceneType.StartScene);
+                        return;
+                    }
+                }
+            }
+            
         }
     }
 }

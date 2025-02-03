@@ -25,14 +25,9 @@ namespace personalTextRPG
         public SceneBase CurScene { get => curScene; private set => curScene = value; }
         public bool IsGameEnd { get => isGameEnd; set => isGameEnd = value; }
 
-        //public void GameStart()
-        //{
-        //    LoadScene(SceneType.StartScene);
-        //    GameLogic();
-        //}
-
         public void LoadScene(SceneType sceneType)
         {
+            curScene = null;
             switch(sceneType)
             {
                 case SceneType.StartScene:
@@ -51,6 +46,7 @@ namespace personalTextRPG
 
         public void GameLogic()
         {
+            //Character.Instance.Update();
             curScene.Update();
         }
     }
