@@ -107,10 +107,11 @@ namespace personalTextRPG.Scene
                             if (inven[goodsNum] == null)
                             {
                                 int price = (int)item[(ItemType)goodsNum][3];
-                                if (Character.Instance.Gold >= price)
+                                Character player = Character.Instance;
+                                if (player.Gold >= price)
                                 {
-                                    Character.Instance.Inventory[goodsNum] = false;
-                                    Character.Instance.Gold -= price;
+                                    player.Inventory[goodsNum] = false;
+                                    player.Gold -= price;
                                     Console.WriteLine("구매를 완료했습니다.");
                                     Thread.Sleep(500);
                                 }
