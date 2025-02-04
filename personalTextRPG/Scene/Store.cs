@@ -110,7 +110,7 @@ namespace personalTextRPG.Scene
                                 Character player = Character.Instance;
                                 if (player.Gold >= price)
                                 {
-                                    player.Inventory[goodsNum] = false;
+                                    player.Inventory[goodsNum] = false; // 구매했으나 장착하지 않았다는 의미.
                                     player.Gold -= price;
                                     Console.WriteLine("구매를 완료했습니다.");
                                     Thread.Sleep(500);
