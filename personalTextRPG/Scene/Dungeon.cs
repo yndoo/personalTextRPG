@@ -20,13 +20,15 @@ namespace personalTextRPG.Scene
             Console.ResetColor();
         }
 
-        private void PlayDungeon(int reward, int recommended)
+        private void PlayDungeon(int reward, int recommended, string title)
         {
             Console.Clear();
 
             bool isClear;
             Character player = Character.Instance;
             int playerDefense = player.Defense + player.ItemDefense;
+            int originalHp = player.Health;
+            int originalGold = player.Gold;
             int finalLoseHp = 0;
 
             // 방어력에 따라 수행
@@ -40,7 +42,7 @@ namespace personalTextRPG.Scene
                 else 
                 { 
                     isClear = false; 
-                    finalLoseHp = player.Health / 2; 
+                    finalLoseHp = originalHp / 2; 
                 }
             }
             else
@@ -57,36 +59,42 @@ namespace personalTextRPG.Scene
                 Thread.Sleep(500);
             }
 
-            // 결과 출력 및 보상 
-
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Clear();
+            // 결과 계산
             if (isClear)
             {
                 int loseHP = random.Next(20, 36);
                 finalLoseHp = loseHP - (playerDefense - recommended);
                 player.Health -= finalLoseHp;
-                Console.WriteLine("\n{0}만큼 피해입었습니다....", finalLoseHp);
-                Thread.Sleep(500);
 
                 int pAtt = player.Attack + player.ItemAttack;
                 int bonusPercent = random.Next(pAtt, pAtt * 2 + 1);
                 int finalReward = reward + (int)reward * bonusPercent / 100;
                 player.Gold += finalReward;
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"던전 클리어! {finalReward} G를 얻었습니다!");
+                Console.WriteLine("던전 클리어");
+                Console.WriteLine($"축하합니다! {title} 던전을 클리어 하였습니다.");
             }
             else
             {
                 player.Health -= finalLoseHp;
-                Console.WriteLine("\n{0}만큼 피해입었습니다.", finalLoseHp);
-
                 Console.WriteLine("던전 실패!");
             }
+            // 결과 출력
+            Console.WriteLine("\n[탐험 결과]");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("체력 {0} -> {1}", originalHp, player.Health);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Gold {0} -> {1}", originalGold, player.Gold);
             Console.ResetColor();
 
-            Console.Write("\n아무 키 입력 >> ");
-            Console.ReadKey(true);
+            while(true)
+            {
+                Console.WriteLine("\n0. 나가기");
+                Console.Write("\n원하시는 행동을 입력해주세요.\n>> ");
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.D0) break;
+            }
             return;
         }
 
@@ -107,13 +115,13 @@ namespace personalTextRPG.Scene
                 switch (key.Key)
                 {
                     case ConsoleKey.D1:
-                        PlayDungeon(1000, 5);
+                        PlayDungeon(1000, 5, "쉬운");
                         return;
                     case ConsoleKey.D2:
-                        PlayDungeon(1700, 10);
+                        PlayDungeon(1700, 10, "보통");
                         return; ;
                     case ConsoleKey.D3:
-                        PlayDungeon(2500, 20);
+                        PlayDungeon(2500, 20, "어려운");
                         return;
                     case ConsoleKey.D0:
                         NextScene = SceneType.StartScene;
