@@ -106,6 +106,7 @@ namespace personalTextRPG.Scene
                         case ConsoleKey.D4:
                         case ConsoleKey.D5:
                         case ConsoleKey.D6:
+                        case ConsoleKey.D7:
                             // 아이템 구매 
                             goodsNum = key.Key - ConsoleKey.D1; // Key 값으로 계산해서 1 ~ 6번 아이템의 인덱스 0~5 구함
                             Character player = Character.Instance;
