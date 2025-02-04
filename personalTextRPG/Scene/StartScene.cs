@@ -38,7 +38,7 @@ namespace personalTextRPG.Scene
                             NextScene = SceneType.StatusScene;
                             break;
                         case ConsoleKey.D2:
-                            NextScene = SceneType.Inventory;
+                            NextScene = SceneType.InventoryScene;
                             break;
                         case ConsoleKey.D3:
                             NextScene = SceneType.Store;

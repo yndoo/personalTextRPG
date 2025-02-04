@@ -12,7 +12,7 @@ namespace personalTextRPG.Scene
         None, 
         StartScene,         // 시작화면 
         StatusScene,        // 상태보기
-        Inventory,          // 인벤토리
+        InventoryScene,     // 인벤토리
         Store,              // 상점 
     }
     class SceneBase

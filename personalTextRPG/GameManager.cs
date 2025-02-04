@@ -36,8 +36,8 @@ namespace personalTextRPG
                 case SceneType.StatusScene:
                     curScene = new StatusScene();
                     break;
-                case SceneType.Inventory:
-                    curScene = new Inventory();
+                case SceneType.InventoryScene:
+                    curScene = new InventoryScene();
                     break;
                 case SceneType.Store:
                     curScene = new Store();

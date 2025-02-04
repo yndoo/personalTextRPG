@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace personalTextRPG.Scene
 {
-    class Inventory : SceneBase
+    class InventoryScene : SceneBase
     {
         public override void Start()
         {
