@@ -70,8 +70,6 @@ namespace personalTextRPG.Scene
                 }
             }
             // NextScene으로 이동
-            //Console.WriteLine("이동 중..");
-            //Thread.Sleep(500);
             GameManager.Instance.LoadScene(NextScene);
             return;
         }

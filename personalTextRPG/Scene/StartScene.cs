@@ -64,7 +64,7 @@ namespace personalTextRPG.Scene
             Console.Clear();
             Console.WriteLine("텍스트 마을");
             Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
-            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 휴식하기");
+            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전 입장 \n5. 휴식하기");
             Console.Write("\n원하시는 행동을 입력해주세요.\n>> ");
             while (true)
             {
@@ -84,6 +84,9 @@ namespace personalTextRPG.Scene
                             NextScene = SceneType.Store;
                             break;
                         case ConsoleKey.D4:
+                            NextScene = SceneType.Dungeon;
+                            break;
+                        case ConsoleKey.D5:
                             NextScene = SceneType.RestingArea;
                             break;
                         default:

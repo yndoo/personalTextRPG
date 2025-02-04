@@ -42,6 +42,9 @@ namespace personalTextRPG
                 case SceneType.Store:
                     curScene = new Store();
                     break;
+                case SceneType.Dungeon:
+                    curScene = new Dungeon();
+                    break;
                 case SceneType.RestingArea:
                     curScene = new RestingArea();
                     break;
