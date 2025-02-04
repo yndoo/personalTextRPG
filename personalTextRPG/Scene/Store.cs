@@ -166,6 +166,10 @@ namespace personalTextRPG.Scene
                         case ConsoleKey.D0:
                             NextScene = SceneType.StartScene;
                             break;
+                        case ConsoleKey.Tab:
+                            // 치트키
+                            Character.Instance.Gold += 2000;
+                            return; // Update 다시 돌기 위함
                         default:
                             Console.WriteLine("잘못된 입력입니다.");
                             break;

@@ -10,7 +10,7 @@ namespace personalTextRPG
 
             while(!GameManager.Instance.IsGameEnd)
             {
-                GameManager.Instance.GameLogic();
+                GameManager.Instance.GameStart();
             }
         }
     }

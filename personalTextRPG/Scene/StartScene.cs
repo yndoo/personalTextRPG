@@ -25,7 +25,7 @@ namespace personalTextRPG.Scene
             base.Update();
             Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
             Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점");
-            Console.Write("원하시는 행동을 입력해주세요.\n>> ");
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>> ");
             while (true)
             {
                 if (Console.KeyAvailable)

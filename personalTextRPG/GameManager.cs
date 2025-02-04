@@ -50,9 +50,8 @@ namespace personalTextRPG
             if(curScene != null) curScene.Start();
         }
 
-        public void GameLogic()
+        public void GameStart()
         {
-            //Character.Instance.Update();
             curScene.Update();
             Thread.Sleep(10);
         }

@@ -99,7 +99,7 @@ namespace personalTextRPG.Scene
                 int viewNum = key.Key - ConsoleKey.D0;
                 if (viewItemMap.ContainsKey(viewNum))
                 {
-                    ItemType curType = viewItemMap[viewNum];
+                    ItemType curType = viewItemMap[viewNum]; // Enum ItenType 번호. Body에는 이 번호로 접근해야 함. 
                     if (player.Body[(int)curType] == true)
                     {
                         player.Body[(int)curType] = false;
