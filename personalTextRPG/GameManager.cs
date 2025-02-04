@@ -19,6 +19,8 @@ namespace personalTextRPG
                 if (instance == null)
                 {
                     instance = new GameManager();
+                    Console.OutputEncoding = Encoding.UTF8;
+                    Console.ResetColor();
                 }
                 return instance;
             }

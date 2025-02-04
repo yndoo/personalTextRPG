@@ -22,12 +22,12 @@ namespace personalTextRPG.Scene
             // 아이템 수치는 장비를 구매할 때가 아니라, 장착할 때 적용해야함. -> 장착한것들만 더해야함 -> 그게 itemAttack, itemDefense
             string itemAtt = "", itemDef = "";
             if (player.ItemAttack > 0) itemAtt = new string($" (+{player.ItemAttack})");
-            if (player.ItemAttack > 0) itemDef = new string($" (+{player.ItemDefense})");
+            if (player.ItemDefense > 0) itemDef = new string($" (+{player.ItemDefense})");
 
             Console.WriteLine($"Lv.{player.Level.ToString("D2")}");
             Console.WriteLine($"{player.Name} ({player.CharClass})");
-            Console.WriteLine($"공격력\t: {player.Attack.ToString().PadRight(3)}{itemAtt}");
-            Console.WriteLine($"방어력\t: {player.Defense.ToString().PadRight(3)}{itemDef}");
+            Console.WriteLine($"공격력\t: {(player.Attack + player.ItemAttack).ToString().PadRight(3)}{itemAtt}");
+            Console.WriteLine($"방어력\t: {(player.Defense + player.ItemDefense).ToString().PadRight(3)}{itemDef}");
             Console.WriteLine($"체력\t: {player.Health}");
             Console.WriteLine($"Gold\t: {player.Gold} G");
         }

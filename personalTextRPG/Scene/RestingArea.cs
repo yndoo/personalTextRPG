@@ -46,6 +46,7 @@ namespace personalTextRPG.Scene
                             player.Gold -= cost;
                             Character.Instance.Health = 100;
                             NextScene = SceneType.StartScene;
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("\n체력이 회복되었습니다! 마을로 돌아갑니다.");
                             Thread.Sleep(1000);
                         }
@@ -70,6 +71,7 @@ namespace personalTextRPG.Scene
                 }
             }
             // NextScene으로 이동
+            Console.ResetColor();
             GameManager.Instance.LoadScene(NextScene);
             return;
         }

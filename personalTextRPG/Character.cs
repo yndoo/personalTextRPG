@@ -51,7 +51,7 @@ namespace personalTextRPG
         public CharacterClass? CharClass { get => charClass; set => charClass = value; }
         public int Attack { get { return attack; } set { attack = value; } }   
         public int Defense { get { return defense; } set { defense = value; } }
-        public int Health { get { return health; } set { health = value; } }    
+        public int Health { get { return health; } set { health = value; if (health < 0) health = 0; } }    
         public int Gold { get { return gold; } set { gold = value; } }
         public int ItemAttack { get { return itemAttack; } set { itemAttack = value; } }
         public int ItemDefense { get { return itemDefense; } set { itemDefense = value; } }
