@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +19,7 @@ namespace personalTextRPG.Scene
         {
             base.Start();
         }
-
+        // 상점 화면 
         private void Display()
         {
             //보유 골드
@@ -25,8 +27,8 @@ namespace personalTextRPG.Scene
             Console.WriteLine("{0} G", Character.Instance.Gold);
             //아이템 목록
             Console.WriteLine("[아이템 목록]");
-            List<bool?> inven = Character.Instance.Inventory;
-            for (int i = 0; i < inven.Count(); i++)
+            HashSet<ItemType> inven = Character.Instance.Inventory;
+            for (int i = 0; i < (int)ItemType.End; i++)
             {
                 string type;
                 List<object> dump = item[(ItemType)i];
@@ -42,7 +44,7 @@ namespace personalTextRPG.Scene
                 }
 
                 // 출력
-                if (inven[i] != null)   // 이미 가지고 있는 아이템
+                if (inven.Contains((ItemType)i))   // 이미 가지고 있는 아이템
                 {
                     Console.WriteLine($" - {dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2].ToString().PadRight(30)}\t| 구매완료");
                 }
@@ -52,6 +54,7 @@ namespace personalTextRPG.Scene
                 }
             }
         }
+        // 아이템 구매 화면
         private void ItemSales()
         {
             Console.Clear();
@@ -61,8 +64,8 @@ namespace personalTextRPG.Scene
             Console.WriteLine("{0} G", Character.Instance.Gold);
             //아이템 목록 (번호 표시)
             Console.WriteLine("[아이템 목록]");
-            List<bool?> inven = Character.Instance.Inventory;
-            for (int i = 0; i < inven.Count(); i++)
+            HashSet<ItemType> inven = Character.Instance.Inventory;
+            for (int i = 0; i < (int)ItemType.End; i++)
             {
                 string type;
                 List<object> dump = item[(ItemType)i];
@@ -76,7 +79,7 @@ namespace personalTextRPG.Scene
                     type = "방어력";
                 }
                 // 출력
-                if (inven[i] != null)   // 이미 가지고 있는 아이템
+                if (inven.Contains((ItemType)i))   // 이미 가지고 있는 아이템
                 {
                     Console.WriteLine($" - {i+1} {dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2].ToString().PadRight(30)}\t| 구매완료");
                 }
@@ -85,8 +88,9 @@ namespace personalTextRPG.Scene
                     Console.WriteLine($" - {i+1} {dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2].ToString().PadRight(30)}\t| {dump[3]} G");
                 }
             }
-            //번호 선택 시 구매
             Console.WriteLine("\n0. 나가기");
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>> ");
+            //번호 선택 시 구매
             while (true)
             {
                 int goodsNum = -1;
@@ -104,26 +108,25 @@ namespace personalTextRPG.Scene
                         case ConsoleKey.D6:
                             // 아이템 구매 
                             goodsNum = key.Key - ConsoleKey.D1; // Key 값으로 계산해서 1 ~ 6번 아이템의 인덱스 0~5 구함
-                            if (inven[goodsNum] == null)
+                            Character player = Character.Instance;
+                            int price = (int)item[(ItemType)goodsNum][3];
+                            if (player.Gold >= price)
                             {
-                                int price = (int)item[(ItemType)goodsNum][3];
-                                Character player = Character.Instance;
-                                if (player.Gold >= price)
+                                if(player.Inventory.Add((ItemType)goodsNum)) // true면 성공
                                 {
-                                    player.Inventory[goodsNum] = false; // 구매했으나 장착하지 않았다는 의미.
                                     player.Gold -= price;
                                     Console.WriteLine("구매를 완료했습니다.");
                                     Thread.Sleep(500);
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Gold 가 부족합니다.");
+                                    Console.WriteLine("이미 구매한 아이템입니다.");
                                     goodsNum = -1;
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("이미 구매한 아이템입니다.");
+                                Console.WriteLine("Gold 가 부족합니다.");
                                 goodsNum = -1;
                             }
                             break;

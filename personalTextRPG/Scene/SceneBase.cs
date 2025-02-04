@@ -18,7 +18,7 @@ namespace personalTextRPG.Scene
     class SceneBase
     {
         private SceneType nextScene;
-        public SceneType NextScene { get => nextScene; set => nextScene = value; }
+        protected SceneType NextScene { get => nextScene; set => nextScene = value; }
         public virtual void Start()
         {
             nextScene = SceneType.None;
