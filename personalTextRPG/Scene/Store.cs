@@ -36,11 +36,11 @@ namespace personalTextRPG.Scene
                 // inventory : enum 번호 그대로임 -> 갑옷인지 무기인지 번호로 구분 가능
                 if (i <= (int)ItemType.ArmorA)
                 {
-                    type = "공격력";
+                    type = "방어력";
                 }
                 else
                 {
-                    type = "방어력";
+                    type = "공격력";
                 }
 
                 // 출력
@@ -72,11 +72,11 @@ namespace personalTextRPG.Scene
                 // inventory : enum 번호 그대로임 -> 갑옷인지 무기인지 번호로 구분 가능
                 if (i <= (int)ItemType.ArmorA)
                 {
-                    type = "공격력";
+                    type = "방어력";
                 }
                 else
                 {
-                    type = "방어력";
+                    type = "공격력";
                 }
                 // 출력
                 if (inven.Contains((ItemType)i))   // 이미 가지고 있는 아이템

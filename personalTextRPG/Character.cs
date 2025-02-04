@@ -30,8 +30,8 @@ namespace personalTextRPG
             }
         }
 
-        private List<bool?> body; // true : 장착, false : 장착X, null : 갖고 있지 않음. (인덱스는 ItemType)
-        private HashSet<ItemType> inventory;
+        private List<bool?> body;               // true : 장착, false : 장착X, null : 갖고 있지 않음. (인덱스는 ItemType)
+        private HashSet<ItemType> inventory;    // 소유 장비 Set 
         private int level;
         private string? name;
         private CharacterClass charClass;
