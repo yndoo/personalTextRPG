@@ -150,7 +150,7 @@ namespace personalTextRPG.Scene
 
             Display();
 
-            Console.WriteLine("\n1. 아이템 구매\n0. 나가기");
+            Console.WriteLine("\n1. 아이템 구매\n0. 나가기\n\n[Tab]키에서 돈 냄새가 난다..\n");
             Console.Write("\n원하시는 행동을 입력해주세요.\n>> ");
             while (true)
             {

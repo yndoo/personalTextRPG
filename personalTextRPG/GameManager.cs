@@ -42,6 +42,9 @@ namespace personalTextRPG
                 case SceneType.Store:
                     curScene = new Store();
                     break;
+                case SceneType.RestingArea:
+                    curScene = new RestingArea();
+                    break;
                 default:
                     Console.WriteLine("LoadScene 실패");
                     Thread.Sleep(1000);

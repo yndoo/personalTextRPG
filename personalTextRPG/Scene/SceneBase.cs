@@ -14,6 +14,7 @@ namespace personalTextRPG.Scene
         StatusScene,        // 상태보기
         InventoryScene,     // 인벤토리
         Store,              // 상점 
+        RestingArea,        // 휴식공간
     }
     class SceneBase
     {
