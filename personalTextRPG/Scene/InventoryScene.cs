@@ -22,7 +22,7 @@ namespace personalTextRPG.Scene
         {
             Console.WriteLine("\n[아이템 목록]");
             HashSet<ItemType> inven = Character.Instance.Inventory;
-            List<bool?> body = Character.Instance.Body;
+            List<bool?> body = Character.Instance.BodySlot;
             for (int i = 0; i < (int)ItemType.End; i++)
             {
                 if (inven.Contains((ItemType)i) == false) continue;
@@ -54,7 +54,7 @@ namespace personalTextRPG.Scene
             Console.WriteLine("\n[아이템 목록]");
             Character player = Character.Instance;
             HashSet<ItemType> inven = player.Inventory;
-            List<bool?> body = player.Body;
+            List<bool?> body = player.BodySlot;
 
             // view 번호와 실제 ItemType 번호 매칭용 Dictionary
             // (HashSet은 순서가 보장이 되지 않기 때문에 따로 생성한 것.)
@@ -100,9 +100,9 @@ namespace personalTextRPG.Scene
                 if (viewItemMap.ContainsKey(viewNum))
                 {
                     ItemType curType = viewItemMap[viewNum]; // Enum ItenType 번호. Body에는 이 번호로 접근해야 함. 
-                    if (player.Body[(int)curType] == true)
+                    if (player.BodySlot[(int)curType] == true)
                     {
-                        player.Body[(int)curType] = false;
+                        player.BodySlot[(int)curType] = false;
                         // 장착된 능력치 해제
                         if ((int)curType <= (int)ItemType.ArmorA)
                         {
@@ -115,7 +115,7 @@ namespace personalTextRPG.Scene
                     }
                     else
                     {
-                        player.Body[(int)curType] = true;
+                        player.BodySlot[(int)curType] = true;
                         // 능력치 적용
                         if ((int)curType <= (int)ItemType.ArmorA)
                         {

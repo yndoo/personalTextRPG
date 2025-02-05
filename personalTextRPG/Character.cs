@@ -30,7 +30,7 @@ namespace personalTextRPG
             }
         }
 
-        private List<bool?> body;               // true : 장착, false : 장착X, null : 갖고 있지 않음. (인덱스는 ItemType)
+        private List<bool?> bodySlot;               // true : 장착, false : 장착X, null : 갖고 있지 않음. (인덱스는 ItemType)
         private HashSet<ItemType> inventory;    // 소유 장비 Set 
         private int level;
         private string? name;
@@ -45,7 +45,7 @@ namespace personalTextRPG
         private int itemAttack;     
         private int itemDefense;
 
-        public List<bool?> Body { get { return body; } set { body = value; } }
+        public List<bool?> BodySlot { get { return bodySlot; } set { bodySlot = value; } }
         public HashSet<ItemType> Inventory { get { return inventory; } set { inventory = value; } }
         public int Level 
         {  get => level; 
@@ -90,10 +90,10 @@ namespace personalTextRPG
 
             inventory = new HashSet<ItemType>();
 
-            body = new List<bool?>();
+            bodySlot = new List<bool?>();
             for (int i = 0; i < (int)ItemType.End; i++)
             {
-                body.Add(null); // 처음에 맨몸 상태 
+                bodySlot.Add(null); // 처음에 맨몸 상태 
             }
         }
     }

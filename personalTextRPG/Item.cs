@@ -8,18 +8,31 @@ using System.Threading.Tasks;
 
 namespace personalTextRPG
 {
-    enum ItemType
+    enum ItemType   // 아이템 종류
     {
-        ArmorC, // 갑옷 세 종류
+        ArmorC, 
         ArmorB,
         ArmorA,
-        LanceC, // 무기 세 종류
+        LanceC, 
         LanceB,
         LanceA,
         LanceSSS,
         End,
     }
+
+    enum EquipType  // 장비 장착 타입
+    {
+        ArmorSlot,
+        WeaponSlot,
+        End,
+    }
     
+    struct ItemInfo
+    {
+        public ItemType itemType;
+        public EquipType slotType;
+    }
+
     class Item
     {
         private Dictionary<ItemType, List<object>> allItemInfo; // 리스트 상세 - 0:아이템명, 1:능력치, 2:설명, 3:가격
