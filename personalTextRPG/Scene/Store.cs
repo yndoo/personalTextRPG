@@ -27,30 +27,20 @@ namespace personalTextRPG.Scene
             Console.WriteLine("{0} G", Character.Instance.Gold);
             //아이템 목록
             Console.WriteLine("[아이템 목록]");
-            HashSet<ItemType> inven = Character.Instance.Inventory;
-            for (int i = 0; i < (int)ItemType.End; i++)
+            HashSet<ItemType> charInven = Character.Instance.Inventory;
+            List<ItemInfo> infoList = item.ItemInfos;
+            for (int i = 0; i < item.ItemInfos.Count(); i++)
             {
-                string type;
-                List<object> dump = item[(ItemType)i];
-
-                // inventory : enum 번호 그대로임 -> 갑옷인지 무기인지 번호로 구분 가능
-                if (i <= (int)ItemType.ArmorA)
-                {
-                    type = "방어력";
-                }
-                else
-                {
-                    type = "공격력";
-                }
-
+                ItemInfo oneItem = infoList[i];
+                string type = oneItem.slotType == EquipType.ArmorSlot ? "방어력" : "공격력";
                 // 출력
-                if (inven.Contains((ItemType)i))   // 이미 가지고 있는 아이템
+                if (charInven.Contains((ItemType)i)) // 이미 가지고 있는 아이템
                 {
-                    Console.WriteLine($" - {dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2].ToString().PadRight(30)}\t| 구매완료");
+                    Console.WriteLine($" - {oneItem.name.PadRight(10)}\t| {type} +{oneItem.effects}\t| {oneItem.desc.PadRight(30)}\t| 구매완료");
                 }
-                else                    // 가지고 있지 않은 아이템
+                else // 가지고 있지 않은 아이템
                 {
-                    Console.WriteLine($" - {dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2].ToString().PadRight(30)}\t| {dump[3]} G");
+                    Console.WriteLine($" - {oneItem.name.PadRight(10)}\t| {type} +{oneItem.effects}\t| {oneItem.desc.PadRight(30)}\t| {oneItem.price} G");
                 }
             }
         }
@@ -64,28 +54,20 @@ namespace personalTextRPG.Scene
             Console.WriteLine("{0} G", Character.Instance.Gold);
             //아이템 목록 (번호 표시)
             Console.WriteLine("[아이템 목록]");
-            HashSet<ItemType> inven = Character.Instance.Inventory;
-            for (int i = 0; i < (int)ItemType.End; i++)
+            HashSet<ItemType> charInven = Character.Instance.Inventory;
+            List<ItemInfo> infoList = item.ItemInfos;
+            for (int i = 0; i < item.ItemInfos.Count(); i++)
             {
-                string type;
-                List<object> dump = item[(ItemType)i];
-                // inventory : enum 번호 그대로임 -> 갑옷인지 무기인지 번호로 구분 가능
-                if (i <= (int)ItemType.ArmorA)
-                {
-                    type = "방어력";
-                }
-                else
-                {
-                    type = "공격력";
-                }
+                ItemInfo oneItem = infoList[i];
+                string type = oneItem.slotType == EquipType.ArmorSlot ? "방어력" : "공격력";
                 // 출력
-                if (inven.Contains((ItemType)i))   // 이미 가지고 있는 아이템
+                if (charInven.Contains((ItemType)i))   // 이미 가지고 있는 아이템
                 {
-                    Console.WriteLine($" - {i+1} {dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2].ToString().PadRight(30)}\t| 구매완료");
+                    Console.WriteLine($" - {i + 1} {oneItem.name.PadRight(10)}\t| {type} +{oneItem.effects}\t| {oneItem.desc.PadRight(30)}\t| 구매완료");
                 }
                 else                    // 가지고 있지 않은 아이템
                 {
-                    Console.WriteLine($" - {i+1} {dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2].ToString().PadRight(30)}\t| {dump[3]} G");
+                    Console.WriteLine($" - {i + 1} {oneItem.name.PadRight(10)}\t| {type} +{oneItem.effects}\t| {oneItem.desc.PadRight(30)}\t| {oneItem.price} G");
                 }
             }
             Console.WriteLine("\n0. 나가기");
@@ -110,7 +92,7 @@ namespace personalTextRPG.Scene
                             // 아이템 구매 
                             goodsNum = key.Key - ConsoleKey.D1; // Key 값으로 계산해서 1 ~ 6번 아이템의 인덱스 0~5 구함
                             Character player = Character.Instance;
-                            int price = (int)item[(ItemType)goodsNum][3];
+                            int price = infoList[goodsNum].price;
                             if (player.Gold >= price)
                             {
                                 if(player.Inventory.Add((ItemType)goodsNum)) // true면 성공

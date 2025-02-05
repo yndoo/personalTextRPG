@@ -26,23 +26,16 @@ namespace personalTextRPG.Scene
             for (int i = 0; i < (int)ItemType.End; i++)
             {
                 if (inven.Contains((ItemType)i) == false) continue;
-                string equiped = "", type;
-                List<object> dump = item[(ItemType)i]; // i타입 아이템 정보 리스트
+                ItemInfo curInfo = item[i]; // i타입 아이템 정보 리스트
 
-                if (i <= (int)ItemType.ArmorA)
-                {
-                    type = "방어력";
-                }
-                else
-                {
-                    type = "공격력";
-                }
+                string type = curInfo.slotType == EquipType.ArmorSlot ? "방어력" : "공격력";
+                string equiped = "";
 
                 if (body[i] == true)   // 장착된 아이템 표시
                 {
                     equiped = "[E]";
                 }
-                Console.WriteLine($" - {equiped}{dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2]}");
+                Console.WriteLine($" - {equiped}{curInfo.name.PadRight(10)}\t| {type} +{curInfo.effects}\t| {curInfo.desc}");
             }
         }
         // 장착 관리 출력
@@ -67,23 +60,15 @@ namespace personalTextRPG.Scene
                 if (inven.Contains(curType) == false) continue;
                 viewItemMap[view] = (ItemType)i;
 
-                string equiped = "", type;
-                List<object> dump = item[curType]; // i타입 아이템 정보 리스트
-
-                if (i <= (int)ItemType.ArmorA)
-                {
-                    type = "방어력";
-                }
-                else
-                {
-                    type = "공격력";
-                }
+                ItemInfo curInfo = item[i]; // i타입 아이템 정보 리스트
+                string equiped = "";
+                string type = curInfo.slotType == EquipType.ArmorSlot ? "방어력" : "공격력";
 
                 if (body[i] == true)   // 장착된 아이템 표시
                 {
                     equiped = "[E]";
                 }
-                Console.WriteLine($" - {view++} {equiped}{dump[0].ToString().PadRight(10)}\t| {type} +{dump[1]}\t| {dump[2]}");
+                Console.WriteLine($" - {view++} {equiped}{curInfo.name.PadRight(10)}\t| {type} +{curInfo.effects}\t| {curInfo.desc}");
             }
 
             Console.WriteLine("\n0. 나가기");
@@ -100,30 +85,31 @@ namespace personalTextRPG.Scene
                 if (viewItemMap.ContainsKey(viewNum))
                 {
                     ItemType curType = viewItemMap[viewNum]; // Enum ItenType 번호. Body에는 이 번호로 접근해야 함. 
+                    ItemInfo curInfo = item[(int)curType];
                     if (player.BodySlot[(int)curType] == true)
                     {
                         player.BodySlot[(int)curType] = false;
                         // 장착된 능력치 해제
-                        if ((int)curType <= (int)ItemType.ArmorA)
+                        if (curInfo.slotType == EquipType.ArmorSlot)
                         {
-                            player.ItemDefense -= (int)item[curType][1];    // 갑옷인 경우
+                            player.ItemDefense -= curInfo.effects;    // 갑옷인 경우
                         }
-                        else
+                        else if (curInfo.slotType == EquipType.WeaponSlot)
                         {
-                            player.ItemAttack -= (int)item[curType][1];     // 무기인 경우
+                            player.ItemAttack -= curInfo.effects;     // 무기인 경우
                         }
                     }
                     else
                     {
                         player.BodySlot[(int)curType] = true;
                         // 능력치 적용
-                        if ((int)curType <= (int)ItemType.ArmorA)
+                        if (curInfo.slotType == EquipType.ArmorSlot)
                         {
-                            player.ItemDefense += (int)item[curType][1];    // 갑옷인 경우
+                            player.ItemDefense += curInfo.effects;    // 갑옷인 경우
                         }
-                        else
+                        else if (curInfo.slotType == EquipType.WeaponSlot)
                         {
-                            player.ItemAttack += (int)item[curType][1];     // 무기인 경우
+                            player.ItemAttack += curInfo.effects;     // 무기인 경우
                         }
                     }
                     return;
