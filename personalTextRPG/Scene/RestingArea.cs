@@ -44,7 +44,7 @@ namespace personalTextRPG.Scene
                         if (player.Gold >= cost)
                         {
                             player.Gold -= cost;
-                            Character.Instance.Health = 100;
+                            Character.Instance.Health = Character.Instance.MaxHp;
                             NextScene = SceneType.StartScene;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("\n체력이 회복되었습니다! 마을로 돌아갑니다.");

@@ -37,6 +37,7 @@ namespace personalTextRPG
         private int attack;
         private int defense;
         private int health;
+        private int maxHp;
         private int gold;
         private int experience;                 // 경험치 (= 던전 클리어 횟수)
 
@@ -58,7 +59,17 @@ namespace personalTextRPG
         public CharacterClass? CharClass { get => charClass; set => charClass = value; }
         public int Attack { get { return attack; } set { attack = value; } }   
         public int Defense { get { return defense; } set { defense = value; } }
-        public int Health { get { return health; } set { health = value; if (health < 0) health = 0; } }    
+        public int Health 
+        { 
+            get { return health; } 
+            set 
+            { 
+                health = value; 
+                if (health < 0) health = 0; 
+                else if (health > maxHp) health = maxHp;
+            } 
+        }
+        public int MaxHp { get { return maxHp; } set { maxHp = value; health = maxHp; } }
         public int Gold { get { return gold; } set { gold = value; } }
         public int ItemAttack { get { return itemAttack; } set { itemAttack = value; } }
         public int ItemDefense { get { return itemDefense; } set { itemDefense = value; } }
@@ -85,6 +96,7 @@ namespace personalTextRPG
             defense = 5;
             itemDefense = 0;
             health = 100;
+            MaxHp = 100;
             gold = 1500;
 
             inventory = new HashSet<ItemType>();

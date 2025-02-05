@@ -17,6 +17,7 @@ namespace personalTextRPG
         LanceB,
         LanceA,
         LanceSSS,
+        Tomato,
         End,
     }
 
@@ -24,6 +25,7 @@ namespace personalTextRPG
     {
         ArmorSlot,
         WeaponSlot,
+        MaxHpPotion,
         End,
     }
     
@@ -60,6 +62,7 @@ namespace personalTextRPG
             itemInfos.Add(new ItemInfo { itemType = ItemType.LanceB, slotType = EquipType.WeaponSlot, name = "청동 도끼", effects = 5, desc = "어디선가 사용됐던 것 같은 도끼입니다.\t", price = 1500 });
             itemInfos.Add(new ItemInfo { itemType = ItemType.LanceA, slotType = EquipType.WeaponSlot, name = "스파르타의 창", effects = 7, desc = "스파르타의 전사들이 사용했다는 전설의 창입니다.", price = 2200 });
             itemInfos.Add(new ItemInfo { itemType = ItemType.LanceSSS, slotType = EquipType.WeaponSlot, name = "토마토 (+15강)", effects = 30, desc = "제 블로그 이름은 토마토가 아니라 톰마토입니다.", price = 10000 });
+            itemInfos.Add(new ItemInfo { itemType = ItemType.Tomato, slotType = EquipType.MaxHpPotion, name = "먹는 토마토", effects = 20, desc = "토마토를 먹으면 근육이 생깁니다.", price = 2000 });
         }
     }
 }

@@ -30,8 +30,22 @@ namespace personalTextRPG.Scene
                 if (inven.Contains((ItemType)i) == false) continue;
                 ItemInfo curInfo = item[i]; // i타입 아이템 정보 리스트
 
-                string type = curInfo.slotType == EquipType.ArmorSlot ? "방어력" : "공격력";
                 string equiped = "";
+                string type = "";
+                switch (curInfo.slotType)
+                {
+                    case EquipType.ArmorSlot:
+                        type = "방어력";
+                        break;
+                    case EquipType.WeaponSlot:
+                        type = "공격력";
+                        break;
+                    case EquipType.MaxHpPotion:
+                        type = "최대체력";
+                        break;
+                    default:
+                        break;
+                }
 
                 if (player.EquipSlot[(int)curInfo.slotType].HasValue && player.EquipSlot[(int)curInfo.slotType].Value.itemType == curInfo.itemType)   // 장착된 아이템 표시
                 {
@@ -63,7 +77,21 @@ namespace personalTextRPG.Scene
 
                 ItemInfo curInfo = item[i]; // i타입 아이템 정보 리스트
                 string equiped = "";
-                string type = curInfo.slotType == EquipType.ArmorSlot ? "방어력" : "공격력";
+                string type = "";
+                switch(curInfo.slotType)
+                {
+                    case EquipType.ArmorSlot:
+                        type = "방어력";
+                        break;
+                    case EquipType.WeaponSlot:
+                        type = "공격력";
+                        break;
+                    case EquipType.MaxHpPotion:
+                        type = "최대체력";
+                        break;
+                    default:
+                        break;
+                }
 
                 if (player.EquipSlot[(int)curInfo.slotType].HasValue && player.EquipSlot[(int)curInfo.slotType].Value.itemType == curInfo.itemType)   // 장착된 아이템 표시
                 {
@@ -127,8 +155,7 @@ namespace personalTextRPG.Scene
                 }
             }
 
-            // 새로운 아이템을 장착
-            player.EquipSlot[(int)slot] = _newItem;
+            // 새로운 아이템을 장착 (및 포션 사용)
             switch (slot)
             {
                 case EquipType.ArmorSlot:
@@ -137,9 +164,14 @@ namespace personalTextRPG.Scene
                 case EquipType.WeaponSlot:
                     player.ItemAttack += newItem.effects;
                     break;
+                case EquipType.MaxHpPotion:
+                    player.MaxHp += newItem.effects;
+                    player.Inventory.Remove(_newItem.Value.itemType);
+                    return; // 아래 줄 실행 X
                 default:
                     break;
             }
+            player.EquipSlot[(int)slot] = _newItem;
         }
 
         public override void Update()
