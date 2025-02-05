@@ -19,7 +19,6 @@ namespace personalTextRPG.Scene
             Console.WriteLine("던전 입장\n");
             Console.ResetColor();
         }
-
         private void PlayDungeon(int reward, int recommended, string title)
         {
             Console.Clear();
@@ -74,13 +73,14 @@ namespace personalTextRPG.Scene
 
                 Console.WriteLine("던전 클리어");
                 Console.WriteLine($"축하합니다! {title} 던전을 클리어 하였습니다.");
+                player.Experience++;
             }
             else
             {
                 player.Health -= finalLoseHp;
                 Console.WriteLine("던전 실패!");
             }
-            // 결과 출력
+            // 보상 출력
             Console.WriteLine("\n[탐험 결과]");
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("체력 {0} -> {1}", originalHp, player.Health);

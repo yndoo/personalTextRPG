@@ -39,6 +39,7 @@ namespace personalTextRPG
         private int defense;
         private int health;
         private int gold;
+        private int experience;                 // 경험치 (= 던전 클리어 횟수)
 
         // 아이템 증가 능력치 따로 저장
         private int itemAttack;     
@@ -46,7 +47,14 @@ namespace personalTextRPG
 
         public List<bool?> Body { get { return body; } set { body = value; } }
         public HashSet<ItemType> Inventory { get { return inventory; } set { inventory = value; } }
-        public int Level {  get { return level; } set { level = value; } }
+        public int Level 
+        {  get => level; 
+           set 
+            { 
+                level = value;
+                experience = 0;
+            } 
+        }
         public string? Name { get => name; set => name = value; }
         public CharacterClass? CharClass { get => charClass; set => charClass = value; }
         public int Attack { get { return attack; } set { attack = value; } }   
@@ -55,6 +63,18 @@ namespace personalTextRPG
         public int Gold { get { return gold; } set { gold = value; } }
         public int ItemAttack { get { return itemAttack; } set { itemAttack = value; } }
         public int ItemDefense { get { return itemDefense; } set { itemDefense = value; } }
+        public int Experience 
+        { 
+            get => experience;
+            set 
+            {
+                experience = value; 
+                if(experience == Level)
+                {
+                    Console.WriteLine("레벨 업!{0} -> {1}",Level, ++Level);
+                }
+            }
+        }
 
         private Character()
         {
